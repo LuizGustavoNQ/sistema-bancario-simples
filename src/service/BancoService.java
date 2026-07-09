@@ -130,10 +130,50 @@ public class BancoService {
 
         for (Conta conta : contas) {
             if (conta.getNumero() == numeroBuscar) {
-                conta.setSaldo(conta.depositar());
+                double valorTrans = 0;
+                conta.setSaldo(conta.depositar(valorTrans));
                 return;
             }
         }
         System.out.println("Conta não encontrada!");
+    }
+
+    public void transferir() {
+        System.out.println("\nDigite o número da conta para transferir: ");
+        int contaOrigem = scanner.nextInt();
+
+        System.out.println("\nDigite o número da conta para receber: ");
+        int contaDestino = scanner.nextInt();
+
+        Conta origem = null;
+        Conta destino = null;
+
+        for (Conta conta : contas) {
+            if (conta.getNumero() == contaOrigem) {
+                origem = conta;
+            }
+
+            if (conta.getNumero() == contaDestino) {
+                destino = conta;
+            }
+        }
+
+        if (origem == null || destino == null) {
+            System.out.println("Conta não encontrada!");
+            return;
+        }
+
+        System.out.println("Valor para transferir:");
+        double valor = scanner.nextDouble();
+
+        if (valor > origem.getSaldo()) {
+            System.out.println("Saldo insuficiente!");
+            return;
+        }
+
+        origem.setSaldo(origem.getSaldo() - valor);
+        destino.setSaldo(destino.getSaldo() + valor);
+
+        System.out.println("Transferência realizada!");
     }
 }

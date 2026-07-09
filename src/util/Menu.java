@@ -20,12 +20,13 @@ public class Menu {
         System.out.println("  [5] Consultar Saldo");
         System.out.println("  [6] Sacar");
         System.out.println("  [7] Depositar");
-        System.out.println("  [8] Sair");
+        System.out.println("  [8] Transferir");
+        System.out.println("  [9] Sair");
         System.out.println("=================================");
     }
 
     public void selecionaOpcao() {
-        while (opcao != 8) {
+        while (opcao != 9) {
             imprimirMenu();
             System.out.print("Digite a opção desejada: ");
 
@@ -60,6 +61,9 @@ public class Menu {
                     bancoService.depositar();
                     break;
                 case 8:
+                    bancoService.transferir();
+                    break;
+                case 9:
                     System.out.println("\n>>> Encerrando o sistema. Até logo! <<<");
                     break;
                 default:

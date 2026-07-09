@@ -49,7 +49,7 @@ public class Conta {
         this.cliente = cliente;
     }
 
-    public double depositar() {
+    public double depositar(double valorTrans) {
         System.out.println("Valor para depositar: ");
         double valorDeposito = scanner.nextDouble();
         return saldo + valorDeposito;
@@ -60,14 +60,25 @@ public class Conta {
         double valorSaque = scanner.nextDouble();
 
         if (valorSaque > saldo) {
-            System.out.println("Valor maior que o saldo total da conta!");
+            System.out.println("Saldo insuficiente!");
             return saldo;
         }
         return saldo - valorSaque;
     }
 
-    public void transferir() {
+    public void transferir(Conta destino) {
+        System.out.println("Valor para transferir: ");
+        double valorTrans = scanner.nextDouble();
 
+        if (valorTrans > saldo) {
+            System.out.println("Saldo insuficiente!");
+            return;
+        }
+
+        saldo = valorTrans;
+        destino.depositar(valorTrans);
+
+        System.out.println("Transferência realizada!");
     }
 
     public void consultarSaldo() {
